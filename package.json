@@ -1,0 +1,37 @@
+{
+  "name": "dev-console.macro",
+  "version": "0.0.1",
+  "description": "A Babel macro that removes console prints in production",
+  "main": "macro.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eemeli/dev-console.macro.git"
+  },
+  "keywords": [
+    "console",
+    "development",
+    "production",
+    "babel",
+    "babel-plugin-macros"
+  ],
+  "author": "Eemeli Aro <eemeli@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eemeli/dev-console.macro/issues"
+  },
+  "homepage": "https://github.com/eemeli/dev-console.macro#readme",
+  "dependencies": {
+    "babel-plugin-macros": "^2.2.1",
+    "babel-plugin-transform-remove-console": "^6.9.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
+    "babel-plugin-tester": "^5.0.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.0.1"
+  }
+}
