@@ -1,6 +1,6 @@
 {
   "name": "dev-console.macro",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A Babel macro that removes console prints in production",
   "main": "macro.js",
   "scripts": {
