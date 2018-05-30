@@ -120,3 +120,31 @@ describe('config', () => {
     }
   })
 })
+
+describe('errors', () => {
+  pluginTester({
+    plugin,
+    snapshot: false,
+    babelOptions: { filename: __filename },
+    tests: [
+      {
+        title: 'no default import',
+        code: `
+        import { foo } from "./macro";
+          foo();
+          blah();
+        `,
+        error: /requires a default import/
+      },
+      {
+        title: 'bad default import name',
+        code: `
+        import foo from "./macro";
+          foo();
+          blah();
+        `,
+        error: /needs to have "console" as its local name/
+      }
+    ]
+  })
+})

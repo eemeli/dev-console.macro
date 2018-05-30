@@ -15,6 +15,11 @@ function macro({ babel, config = defaultConfig, references, state }) {
 
   // console needs to be in global scope for the plugin
   const { node, scope } = references.default[0]
+  if (node.name !== 'console') {
+    throw new MacroError(
+      'The default import of dev-console.macro needs to have "console" as its local name'
+    )
+  }
   scope.removeBinding(node.name)
   scope.addGlobal(node)
 
