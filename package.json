@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/eemeli/dev-console.macro#readme",
   "dependencies": {
-    "babel-plugin-macros": "^2.2.1",
     "babel-plugin-transform-remove-console": "^6.9.4"
   },
   "devDependencies": {
@@ -33,5 +32,8 @@
     "babel-plugin-tester": "^5.0.0",
     "babel-preset-env": "^1.7.0",
     "jest": "^23.0.1"
+  },
+  "peerDependencies": {
+    "babel-plugin-macros": "2.x"
   }
 }
