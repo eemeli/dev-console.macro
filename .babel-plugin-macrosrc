@@ -1,0 +1,8 @@
+{
+  "remove-console": {
+    "test": true
+  },
+  "test-remove-console": {
+    "test": { "exclude": ["error", "info"] }
+  }
+}

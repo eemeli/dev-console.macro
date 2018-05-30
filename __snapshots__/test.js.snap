@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`config macros bound-excludes: bound-excludes 1`] = `
+"
+import console from \\"./macro\\";
+function foo() {
+  const a = console.log;
+  a();
+  const b = console.error.bind(console);
+  b(\\"asdf\\");
+  blah();
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+function foo() {
+  const a = function () {};
+  a();
+  const b = console.error.bind(console);
+  b(\\"asdf\\");
+  blah();
+}
+"
+`;
+
+exports[`config macros excludes: excludes 1`] = `
+"
+import console from \\"./macro\\";
+function foo() {
+  console.log(\\"foo\\");
+  console.error(\\"bar\\");
+  blah();
+  console.info(\\"blah\\");
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+function foo() {
+  console.error(\\"bar\\");
+  blah();
+  console.info(\\"blah\\");
+}
+"
+`;
+
+exports[`macros basic: basic 1`] = `
+"
+import console from \\"./macro\\";
+function foo() {
+  console.log(\\"foo\\");
+  blah();
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+function foo() {
+  blah();
+}
+"
+`;
+
+exports[`macros guards: guards 1`] = `
+"
+import console from \\"./macro\\";
+function foo() {
+  true && console.log(\\"foo\\");
+  blah();
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+function foo() {
+  true && void 0;
+  blah();
+}
+"
+`;
+
+exports[`macros local-binding: local-binding 1`] = `
+"
+import console from \\"./macro\\";
+function foo(console) {
+  console.foo(\\"hi\\");
+  const bar = console.foo.bind(console);
+}
+function bar(a) {
+  const { console } = a;
+  a.b = console => console.bar(\\"bar\\");
+  if (console.foo.call(console, \\"bar\\")) {
+    return;
+  }
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+function foo(console) {
+  console.foo(\\"hi\\");
+  const bar = console.foo.bind(console);
+}
+function bar(a) {
+  const { console } = a;
+  a.b = console => console.bar(\\"bar\\");
+  if (console.foo.call(console, \\"bar\\")) {
+    return;
+  }
+}
+"
+`;
+
+exports[`macros member-expr-assignment-no-op: member-expr-assignment-no-op 1`] = `
+"
+import console from \\"./macro\\";
+function foo() {
+  console.foo = function foo() {
+    console.log(\\"foo\\");
+  };
+  console.error = myConsoleError;
+  console.foo();
+  console.error(\\"asdf\\");
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+function foo() {
+  console.foo = function () {};
+  console.error = function () {};
+}
+"
+`;
+
+exports[`macros member-expr-no-op: member-expr-no-op 1`] = `
+"
+import console from \\"./macro\\";
+const a = console.log;
+a();
+const b = console.log.bind(console);
+b(\\"asdf\\");
+var x = console.log ? console.log('log') : foo();
+function foo() {
+  if (console.error) {
+    console.error(\\"Errored\\");
+  }
+}
+console.log.call(console, \\"foo\\");
+console.log.apply(null, {});
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const a = function () {};
+a();
+const b = function () {};
+b(\\"asdf\\");
+var x = function () {} ? void 0 : foo();
+function foo() {
+  if (function () {}) {}
+}
+"
+`;
+
+exports[`macros replace-with-empty-block: replace-with-empty-block 1`] = `
+"
+import console from \\"./macro\\";
+if (blah) console.log(blah);
+for (;;) console.log(blah);
+for (var blah in []) console.log(blah);
+for (var blah of []) console.log(blah);
+while (blah) console.log(blah);
+do console.log(blah); while (blah);
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+if (blah) {}
+for (;;) {}
+for (var blah in []) {}
+for (var blah of []) {}
+while (blah) {}
+do {} while (blah);
+"
+`;
+
+exports[`macros top-level: top-level 1`] = `
+"
+import console from \\"./macro\\";
+true && console.log(\\"foo\\");
+blah();
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+true && void 0;
+blah();
+"
+`;
+
+exports[`macros top-level-stmts: top-level-stmts 1`] = `
+"
+import console from \\"./macro\\";
+console.log(\\"foo\\");
+blah();
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+blah();
+"
+`;
